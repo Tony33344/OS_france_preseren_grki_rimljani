@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Trophy, RotateCcw, Check, X, Sparkles, Award } from "lucide-react";
 
 interface QuizQuestion {
@@ -7,7 +7,7 @@ interface QuizQuestion {
   options: string[];
   correct: number;
   explanation: string;
-  civilization: "greece" | "rome";
+  civilization: "greece" | "rome" | "both";
 }
 
 interface QuizProps {
@@ -23,6 +23,43 @@ export function Quiz({ questions }: QuizProps) {
     new Array(questions.length).fill(null)
   );
   const [finished, setFinished] = useState(false);
+  const [bestScore, setBestScore] = useState<number | null>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("grcija-rim-quiz-best");
+    if (saved) setBestScore(Number(saved));
+  }, []);
+
+  useEffect(() => {
+    if (!finished) return;
+    const prev = Number(localStorage.getItem("grcija-rim-quiz-best") ?? "0");
+    if (score > prev) {
+      localStorage.setItem("grcija-rim-quiz-best", String(score));
+      setBestScore(score);
+    }
+  }, [finished, score]);
+
+  // Keyboard shortcuts: 1-4 select answer, Enter = next, R = restart
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (finished) {
+        if (e.key === "r" || e.key === "R") handleRestart();
+        return;
+      }
+      if (showResult) {
+        if (e.key === "Enter") handleNext();
+        return;
+      }
+      if (e.key >= "1" && e.key <= "4") {
+        const idx = Number(e.key) - 1;
+        if (idx < questions[currentQuestion].options.length) {
+          handleAnswer(idx);
+        }
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [currentQuestion, showResult, finished, questions]);
 
   const handleAnswer = (idx: number) => {
     if (showResult) return;
@@ -87,12 +124,17 @@ export function Quiz({ questions }: QuizProps) {
             {result.title}
           </h2>
           <p className="mb-2 text-lg text-stone-600">{result.message}</p>
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-stone-100 px-6 py-3">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-stone-100 px-6 py-3">
             <Award className="h-5 w-5 text-amber-500" />
             <span className="text-2xl font-bold text-stone-900">
               {score} / {questions.length}
             </span>
           </div>
+          {bestScore !== null && (
+            <p className="mb-8 text-sm text-stone-500">
+              Najboljši rezultat: {bestScore} / {questions.length}
+            </p>
+          )}
 
           <div className="mb-8 grid grid-cols-1 gap-2 text-left sm:grid-cols-2">
             {questions.map((q, idx) => {
@@ -143,7 +185,13 @@ export function Quiz({ questions }: QuizProps) {
 
   const question = questions[currentQuestion];
   const progress = ((currentQuestion + 1) / questions.length) * 100;
-  const isGreece = question.civilization === "greece";
+  const civ = question.civilization;
+  const tagStyle =
+    civ === "greece"
+      ? { bg: "bg-amber-100", text: "text-amber-700", icon: "🏛️", label: "Antična Grčija" }
+      : civ === "rome"
+      ? { bg: "bg-red-100", text: "text-red-700", icon: "🏺", label: "Stari Rim" }
+      : { bg: "bg-purple-100", text: "text-purple-700", icon: "⚖️", label: "Primerjava" };
 
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -164,6 +212,14 @@ export function Quiz({ questions }: QuizProps) {
         <p className="mx-auto max-w-2xl text-lg text-stone-600">
           Odgovori na {questions.length} vprašanj in preveri, kako dobro
           poznaš antično Grčijo in Rim. Za vsak odgovor dobiš pojasnilo!
+        </p>
+        {bestScore !== null && (
+          <p className="mt-2 text-sm text-stone-500">
+            Tvoj najboljši rezultat: {bestScore} / {questions.length}
+          </p>
+        )}
+        <p className="mt-1 text-xs text-stone-400">
+          Tipke: 1–4 = izberi odgovor, Enter = naprej, R = ponovi
         </p>
       </motion.div>
 
@@ -198,15 +254,11 @@ export function Quiz({ questions }: QuizProps) {
         >
           {/* Question tag */}
           <div
-            className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 ${
-              isGreece
-                ? "bg-amber-100 text-amber-700"
-                : "bg-red-100 text-red-700"
-            }`}
+            className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 ${tagStyle.bg} ${tagStyle.text}`}
           >
-            <span className="text-base">{isGreece ? "🏛️" : "🏺"}</span>
+            <span className="text-base">{tagStyle.icon}</span>
             <span className="text-xs font-semibold">
-              {isGreece ? "Antična Grčija" : "Stari Rim"}
+              {tagStyle.label}
             </span>
           </div>
 
@@ -278,6 +330,8 @@ export function Quiz({ questions }: QuizProps) {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="mt-6 overflow-hidden rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-5"
+                aria-live="polite"
+                aria-atomic="true"
               >
                 <div className="flex items-start gap-3">
                   <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white">

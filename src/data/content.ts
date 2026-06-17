@@ -35,7 +35,7 @@ export interface QuizQuestion {
   options: string[];
   correct: number;
   explanation: string;
-  civilization: "greece" | "rome";
+  civilization: "greece" | "rome" | "both";
 }
 
 export interface Source {
@@ -106,11 +106,11 @@ export const timelineEvents: TimelineEvent[] = [
     category: "political",
   },
   {
-    year: "451 pr. n. št.",
-    title: "Likurgov zakon XII. plošč",
+    year: "451-450 pr. n. št.",
+    title: "Zakon XII. plošč",
     civilization: "rome",
     description:
-      "Likurg-Stolon sestavi Zakon XII. plošč, prvi pisni rimski zakonik. Pravice zapisane za vse.",
+      "Deset mož (decemviri) zapiše prvi rimski zakonik na 12 bronastih ploščah. Pravice so bile dostopne vsem svobodnim Rimljanom.",
     category: "political",
   },
   {
@@ -266,7 +266,7 @@ export const comparisonPoints: ComparisonPoint[] = [
       keyPoints: [
         "Eklezija - vsi državljani nad 18 let",
         "Srečanja 3-4x mesečno",
-        "Drakont (Demosten) - govornik predlaga zakon",
+        "Govorniki (retorji) predlagajo zakone na zboru",
         "Glasovanje z dvigom rok ali kamenčki",
         "Od 6. stol. pr. n. št.: ostrakizem (izgnanstvo)",
       ],
@@ -323,7 +323,7 @@ export const comparisonPoints: ComparisonPoint[] = [
         "12 olimpijskih bogov",
         "Delfski orakelj - svetuje pri ustanovitvi kolonij",
         "Verski prazniki - državni prazniki",
-        "Aretuza: svetišče z daritvami",
+        "Areopag - verski in sodni svet na Aresovem griču",
         "Religija ločena od politike, a prepletena",
       ],
     },
@@ -490,12 +490,12 @@ export const sources: Source[] = [
   },
   {
     id: 5,
-    title: "Enciklopedija - Antični Rim",
-    author: "Slovenski spletni portal",
-    year: "2023",
+    title: "World History Encyclopedia - Ancient Rome",
+    author: "World History Encyclopedia",
+    year: "2024",
     type: "website",
-    url: "https://www.enciklopedija.si/",
-    description: "Slovenska spletna enciklopedija s članki o antičnem Rimu.",
+    url: "https://www.worldhistory.org/Rome/",
+    description: "Akademsko pregledana spletna enciklopedija z obsežnimi članki o rimski zgodovini.",
   },
   {
     id: 6,
@@ -526,12 +526,12 @@ export const sources: Source[] = [
   },
   {
     id: 9,
-    title: "Metropolis - Virtualna rekonstrukcija antičnega Rima",
-    author: "Različni avtorji",
-    year: "2023",
+    title: "Metropolitan Museum - Ancient Rome",
+    author: "The Met",
+    year: "2024",
     type: "website",
-    url: "https://www.romanoimpero.com/",
-    description: "Spletna stran s 3D modeli antičnih zgradb, primerna za učence.",
+    url: "https://www.metmuseum.org/art/metpublications/titles-with-full-text-online?rpp=90&pg=1&rd=%7B%22Full-Text%22%3Atrue%7D&ft=*&searchType=adv&dept=3",
+    description: "Zbirkovita zbirka umetnin in izobraževalnih virov o antičnem Rimu iz Metropolitanskega muzeja.",
   },
   {
     id: 10,
@@ -539,7 +539,7 @@ export const sources: Source[] = [
     author: "Khan Academy",
     year: "2024",
     type: "website",
-    url: "https://www.khanacademy.org/humanities/ap-art-history/ancient-mediterranean-ap",
+    url: "https://www.khanacademy.org/humanities/world-history/ancient-medieval",
     description:
       "Brezplačni video posnetki in članki o antičnih civilizacijah (tudi v slovenščini).",
   },
@@ -638,6 +638,131 @@ export const quizQuestions: QuizQuestion[] = [
     correct: 2,
     explanation:
       "Oktavijan je leta 27 pr. n. št. dobil častni naziv 'Augustus' (Vzvišeni) in postal prvi 'princps' (prvi državljan), s čimer se je začela era cesarstva.",
+    civilization: "rome",
+  },
+  {
+    question: "Kakšna oblika vladavine je bila v Šparti?",
+    options: [
+      "Neposredna demokracija",
+      "Dvojna monarhija z omejenim ljudskim zborom",
+      "Cesarska avtokracija",
+      "Aristokratska republika brez kralja",
+    ],
+    correct: 1,
+    explanation:
+      "Šparta je imela dvojno monarhijo (dva kralja), pet eforjev z dejansko oblastjo in ljudski zbor (apela). To je bilo radikalno drugače od atenske demokracije.",
+    civilization: "greece",
+  },
+  {
+    question: "Kaj je bil rimski diktator?",
+    options: [
+      "Tiran, ki je zavzel oblast z nasiljem",
+      "Začasni vrhovni pooblaščenec v izrednih razmerah",
+      "Vojaški poveljnik v Galiji",
+      "Senatov predsednik za življenje",
+    ],
+    correct: 1,
+    explanation:
+      "Rimski diktator je bil začasno imenovan v izrednih razmerah (npr. vojna). Mandat je bil omejen na 6 mesecev. To je bilo republikansko varovalo, ne tiranija.",
+    civilization: "rome",
+  },
+  {
+    question: "Kateri dogodek je omogočil demokratične reforme Solona?",
+    options: [
+      "Zmaga v perzijskih vojnah",
+      "Državljanska vojna med revnimi in bogatimi",
+      "Tiranska vladavina Pezistrata",
+      "Propad mikenske civilizacije",
+    ],
+    correct: 1,
+    explanation:
+      "Solon je bil izvoljen za arhonta leta 594 pr. n. št. med družbenimi napetostmi v Atenah. Njegove reforme so odpravile dolžniško suženjstvo in uvedle novo družbeno ureditev.",
+    civilization: "greece",
+  },
+  {
+    question: "Kaj je določal rimski cenzor?",
+    options: [
+      "Vojsko in obrambo",
+      "Popis prebivalstva, davke in moralo",
+      "Verske obrede",
+      "Tuji trgovinski pogodbi",
+    ],
+    correct: 1,
+    explanation:
+      "Cenzorji so vodili popis prebivalstva (census), določali davčne razrede, nadzorovali moralno ravnanje senatorjev in javno upravljanje. Bili so zelo vplivni magistrati.",
+    civilization: "rome",
+  },
+  {
+    question: "Kdaj so vsi prosti prebivalci rimskega cesarstva dobili rimsko državljanstvo?",
+    options: [
+      "509 pr. n. št.",
+      "212 n. št.",
+      "27 pr. n. št.",
+      "476 n. št.",
+    ],
+    correct: 1,
+    explanation:
+      "Leta 212 n. št. je cesar Karakala izdal ukaz Constitutio Antoniniana, s katerim so vsi prosti prebivalci cesarstva dobili rimsko državljanstvo. Pred tem so bile pravice omejene.",
+    civilization: "rome",
+  },
+  {
+    question: "Kdo je bil tiran v Atenah, preden je nastala demokracija?",
+    options: ["Perikles", "Solon", "Pezistrat", "Klejsten"],
+    correct: 2,
+    explanation:
+      "Pezistrat je bil tiran v Atenah (okoli 561-527 pr. n. št.). Njegova vladavina je dejansko ojačala ljudstvo in pripravila pot za Klejstenove demokratične reforme.",
+    civilization: "greece",
+  },
+  {
+    question: "Kateri rimski organ je lahko z vetom blokiral odločitve konzulov?",
+    options: [
+      "Senat",
+      "Cenzorji",
+      "Tribuni ljudstva",
+      "Pretorji",
+    ],
+    correct: 2,
+    explanation:
+      "Tribuni ljudstva (tribuni plebeji) so imeli pravico veta (intercessio) nad odločitvami konzulov in drugih magistratov, če so te škodovale plebejcem. To je bil ključni demokratični mehanizem.",
+    civilization: "rome",
+  },
+  {
+    question: "Kaj je bila glavna razlika med atenskim in špartanskim državljanstvom?",
+    options: [
+      "Špartanci so imeli več političnih pravic",
+      "Atene so imele širšo definicijo državljanstva",
+      "V Šparti so lahko ženske volile",
+      "V Šparti so imeli sužnji (heloti) več pravic",
+    ],
+    correct: 1,
+    explanation:
+      "Atene so imele širšo definicijo državljanstva, ki je vključevala vse proste moške. V Šparti so bili heloti (sužnji) in perioiki (prosti ne-državljani) brez političnih pravic. Ženske v Šparti so imele več svobode kot v Atenah, a še vedno niso imele političnih pravic.",
+    civilization: "both",
+  },
+  {
+    question: "Kateri rimski zakonik je bil prvič zapisan in objavljen za javnost?",
+    options: [
+      "Justinijanov zakonik",
+      "Zakon XII. plošč",
+      "Ciceronov zakon o republiki",
+      "Hortenzijev zakon",
+    ],
+    correct: 1,
+    explanation:
+      "Zakon XII. plošč (Lex Duodecim Tabularum) iz leta 451-450 pr. n. št. je bil prvi pisni rimski zakonik. Pred tem so zakone poznali le patricijski svečeniki (pontifex), kar je dajalo neenakopravnost.",
+    civilization: "rome",
+  },
+  {
+    question: "Kdo je rekel 'Kocka je vržena' (alea iacta est)?",
+    options: [
+      "Avgust",
+      "Cicero",
+      "Julij Cezar",
+      "Brut",
+    ],
+    correct: 2,
+    explanation:
+      "Julij Cezar je leta 49 pr. n. št. prekoračil reko Rubikon z vojsko, kar je pomenilo državljansko vojno. Pri tem naj bi rekel 'alea iacta est' — kocka je vržena, ker ni bilo več poti nazaj.",
     civilization: "rome",
   },
 ];

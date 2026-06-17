@@ -15,15 +15,16 @@ interface KeyFiguresProps {
   figures: Figure[];
 }
 
-const greeks = [
-  "/images/greek-citizen.jpg",
-  "/images/democracy-diagram.jpg",
-];
-
-const romans = [
-  "/images/roman-senator.jpg",
-  "/images/roman-republic-diagram.jpg",
-];
+const figureImages: Record<string, string> = {
+  Klejsten: "/images/democracy-diagram.jpg",
+  Perikles: "/images/greek-citizen.jpg",
+  Solon: "/images/greek-agora.jpg",
+  Romul: "/images/roman-forum.jpg",
+  "Lucij Junij Brut": "/images/roman-republic-diagram.jpg",
+  Cicero: "/images/roman-senator.jpg",
+  "Julij Cezar": "/images/roman-forum.jpg",
+  "Oktavijan / Avgust": "/images/roman-senate.jpg",
+};
 
 export function KeyFigures({ figures }: KeyFiguresProps) {
   const [filter, setFilter] = useState<"all" | "greece" | "rome">("all");
@@ -58,14 +59,17 @@ export function KeyFigures({ figures }: KeyFiguresProps) {
 
       {/* Filter */}
       <div className="mb-10 flex flex-wrap items-center justify-center gap-3">
-        {[
-          { id: "all", label: "Vse osebnosti", color: "stone" },
-          { id: "greece", label: "🏛️ Grki", color: "amber" },
-          { id: "rome", label: "🏺 Rimljani", color: "red" },
-        ].map((option) => (
+        {(
+          [
+            { id: "all", label: "Vse osebnosti", color: "stone" },
+            { id: "greece", label: "🏛️ Grki", color: "amber" },
+            { id: "rome", label: "🏺 Rimljani", color: "red" },
+          ] as { id: typeof filter; label: string; color: string }[]
+        ).map((option) => (
           <button
             key={option.id}
-            onClick={() => setFilter(option.id as any)}
+            onClick={() => setFilter(option.id)}
+            aria-pressed={filter === option.id}
             className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
               filter === option.id
                 ? "bg-stone-900 text-white shadow-md"
@@ -81,8 +85,7 @@ export function KeyFigures({ figures }: KeyFiguresProps) {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {filteredFigures.map((figure, idx) => {
           const isGreece = figure.civilization === "greece";
-          const images = isGreece ? greeks : romans;
-          const imageUrl = images[idx % images.length];
+          const imageUrl = figureImages[figure.name] ?? "/images/acropolis.jpg";
           const accent = isGreece
             ? "from-amber-500 to-orange-500"
             : "from-red-500 to-rose-500";

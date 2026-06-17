@@ -114,6 +114,8 @@ export default function App() {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
+                  aria-current={activeSection === section.id ? "page" : undefined}
+                  aria-label={`Pojdi na razdelek ${section.label}`}
                   className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all sm:text-sm ${
                     activeSection === section.id
                       ? "bg-white text-amber-700 shadow-sm"

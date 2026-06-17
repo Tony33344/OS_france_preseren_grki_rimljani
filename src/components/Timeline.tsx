@@ -32,10 +32,12 @@ const categoryColors: Record<string, { bg: string; text: string; ring: string }>
 
 export function Timeline({ events }: TimelineProps) {
   const [filter, setFilter] = useState<"all" | "greece" | "rome">("all");
+  const [catFilter, setCatFilter] = useState<"all" | "political" | "social" | "military" | "cultural">("all");
 
   const filteredEvents = events.filter((e) => {
-    if (filter === "all") return true;
-    return e.civilization === filter;
+    const civMatch = filter === "all" || e.civilization === filter;
+    const catMatch = catFilter === "all" || e.category === catFilter;
+    return civMatch && catMatch;
   });
 
   return (
@@ -62,28 +64,58 @@ export function Timeline({ events }: TimelineProps) {
       </motion.div>
 
       {/* Filter buttons */}
-      <div className="mb-12 flex flex-wrap items-center justify-center gap-3">
-        <div className="flex items-center gap-2 text-sm text-stone-500">
-          <Filter className="h-4 w-4" />
-          <span>Filter:</span>
+      <div className="mb-12 flex flex-col items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center gap-2 text-sm text-stone-500">
+            <Filter className="h-4 w-4" />
+            <span>Civilizacija:</span>
+          </div>
+          {(
+            [
+              { id: "all", label: "Vse" },
+              { id: "greece", label: "🏛️ Antična Grčija" },
+              { id: "rome", label: "🏺 Stari Rim" },
+            ] as { id: typeof filter; label: string }[]
+          ).map((option) => (
+            <button
+              key={option.id}
+              onClick={() => setFilter(option.id)}
+              aria-pressed={filter === option.id}
+              className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
+                filter === option.id
+                  ? "bg-stone-900 text-white shadow-md"
+                  : "bg-white text-stone-600 hover:bg-stone-100"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
-        {[
-          { id: "all", label: "Vse", color: "stone" },
-          { id: "greece", label: "🏛️ Antična Grčija", color: "amber" },
-          { id: "rome", label: "🏺 Stari Rim", color: "red" },
-        ].map((option) => (
-          <button
-            key={option.id}
-            onClick={() => setFilter(option.id as any)}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
-              filter === option.id
-                ? "bg-stone-900 text-white shadow-md"
-                : "bg-white text-stone-600 hover:bg-stone-100"
-            }`}
-          >
-            {option.label}
-          </button>
-        ))}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <span className="text-sm text-stone-500">Kategorija:</span>
+          {(
+            [
+              { id: "all", label: "Vse" },
+              { id: "political", label: "🏛️ Politično" },
+              { id: "social", label: "👥 Družbeno" },
+              { id: "military", label: "⚔️ Vojaško" },
+              { id: "cultural", label: "🎭 Kulturno" },
+            ] as { id: typeof catFilter; label: string }[]
+          ).map((option) => (
+            <button
+              key={option.id}
+              onClick={() => setCatFilter(option.id)}
+              aria-pressed={catFilter === option.id}
+              className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                catFilter === option.id
+                  ? "bg-stone-700 text-white shadow-sm"
+                  : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Timeline */}
