@@ -66,12 +66,28 @@ export const timelineEvents: TimelineEvent[] = [
     category: "political",
   },
   {
+    year: "776 pr. n. št.",
+    title: "Prve olimpijske igre",
+    civilization: "greece",
+    description:
+      "V Olimpiji se odvijajo prve zabeležene olimpijske igre. Verski in športni festivali so povezovali grški svet in krepili skupno identiteto.",
+    category: "cultural",
+  },
+  {
     year: "621 pr. n. št.",
     title: "Drakonove zakoni v Atenah",
     civilization: "greece",
     description:
       "Drakon zapiše prve atenske zakone. So znani po izjemni strogosti (smrt za skoraj vsak prekršek).",
     category: "political",
+  },
+  {
+    year: "534 pr. n. št.",
+    title: "Rojstvo grške tragedije",
+    civilization: "greece",
+    description:
+      "Tezis (Thespis) prvič nastopa kot igralec v Atenah na festivalu v čast Dionizu. Gledališče postane državna ustanova, kjer so državljani glasovali o najboljši drami.",
+    category: "cultural",
   },
   {
     year: "509 pr. n. št.",
@@ -154,12 +170,28 @@ export const timelineEvents: TimelineEvent[] = [
     category: "social",
   },
   {
+    year: "55 pr. n. št.",
+    title: "Pompejevo gledališče",
+    civilization: "rome",
+    description:
+      "Pompej Veliki zgradi prvo stalno kamnito gledališče v Rimu. Prikazuje, kako so rimski voditelji uporabljali kulturo za pridobivanje javne podpore.",
+    category: "cultural",
+  },
+  {
     year: "44 pr. n. št.",
     title: "Cezarjev atentat",
     civilization: "rome",
     description:
       "Julij Cezar je ubit na Marsovem polju s strani senatorjev. Konec republike se bliža.",
     category: "political",
+  },
+  {
+    year: "19 pr. n. št.",
+    title: "Vergilijeva Eneida",
+    civilization: "rome",
+    description:
+      "Objavljeni največji rimski ep - Eneida Vergilija. Augustus jo uporablja kot propagandno delo, ki utemeljuje rimsko cesarstvo z mitološkimi koreninami.",
+    category: "cultural",
   },
   {
     year: "27 pr. n. št.",
