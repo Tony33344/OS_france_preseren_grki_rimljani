@@ -151,8 +151,8 @@ export function Sources({ sources }: SourcesProps) {
               <li className="flex items-start gap-2">
                 <span className="text-amber-500">▸</span>
                 <span>
-                  Standardiziranem učnem načrtu za zgodovino v 9. razredu
-                  osnovne šole (ZRSŠ)
+                  Standardiziranem učnem načrtu za zgodovino v 7. razredu
+                  osnovne šole OŠ Franceta Prešerna (ZRSŠ)
                 </span>
               </li>
               <li className="flex items-start gap-2">

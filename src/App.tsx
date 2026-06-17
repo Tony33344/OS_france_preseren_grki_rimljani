@@ -106,7 +106,7 @@ export default function App() {
                 <div className="text-sm font-bold leading-tight">
                   Grčija & Rim
                 </div>
-                <div className="text-xs text-stone-500">9. razred OŠ</div>
+                <div className="text-xs text-stone-500">OŠ Franceta Prešerna 7. razred</div>
               </div>
             </div>
             <div className="flex items-center gap-1 overflow-x-auto rounded-full bg-stone-100 p-1 sm:bg-stone-200/50">
@@ -186,7 +186,7 @@ export default function App() {
                 </div>
               </div>
               <p className="mt-4 text-sm">
-                Sodobno didaktično gradivo za 9. razred osnovne šole o
+                Sodobno didaktično gradivo za 7. razred osnovne šole (OŠ Franceta Prešerna) o
                 primerjavi načinov vladanja v antični Grčiji in Rimu.
               </p>
             </div>

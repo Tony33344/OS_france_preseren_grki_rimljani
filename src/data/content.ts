@@ -468,7 +468,7 @@ export const sources: Source[] = [
     year: "2017",
     type: "book",
     description:
-      "Učbenik za 9. razred osnovne šole - vsebuje poglavja o antični Grčiji in Rimu.",
+      "Učbenik za 7. razred osnovne šole (OŠ Franceta Prešerna) - vsebuje poglavja o antični Grčiji in Rimu.",
   },
   {
     id: 3,
