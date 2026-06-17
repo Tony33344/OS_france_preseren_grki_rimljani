@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Sparkles, BookOpen } from "lucide-react";
+import { ArrowDown, Sparkles, BookOpen } from "lucide-react";
 
 interface HeroProps {
   onStart: () => void;
@@ -98,9 +98,9 @@ export function Hero({ onStart }: HeroProps) {
             >
               <button
                 onClick={onStart}
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-amber-500/30 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/50"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-semibold text-stone-900 shadow-xl shadow-black/20 transition-all hover:scale-105 hover:shadow-2xl"
               >
-                <Play className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                <ArrowDown className="h-5 w-5 transition-transform group-hover:translate-y-0.5" />
                 Začni raziskovati
               </button>
               <a
